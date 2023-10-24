@@ -33,12 +33,42 @@ we record its information in a file. Those records will be targets being fed to 
 
 ## Integrated into AFLGO
 
-### aflgo/instrument
-
-
-
 ### Modification in aflgo/instrument
 
-### Modification in aflgo/examples
 
-## Test llvm-itargets-pass
+### Modification in aflgo/example
+
+## Build and Test llvm-itargets-pass
+
+First you need to properly install the original version of aflgo. Then, replace the whole `/instrument` 
+and `/example` with the two directories in this project. Then you want to recomplie the `aflgo-clang`, 
+`aflgo-clang++` and dynamic libs using following:
+```bash
+# suppose you have properly installed aflgo and have replaced correspondding files
+# and suppose the $PWD is aflgo main folder
+cd instrument
+make
+```
+You may notice some error messages in your shell, it's totally fine because the our modifed passes cannot 
+pass the test cases provided. After doing this, all stuff have been prepared. The lib will be used 
+automatically by AFLGO.
+
+### Test for a simple case
+Generate BBtargets.txt using:
+```bash
+# suppose the $PWD is aflgo main folder
+export AFLGO=$PWD
+cd example
+./indirect_call_test.sh
+```
+The BBtargets.txt will be generated.
+
+### Test for libxml2
+Generate BBtargets.txt using:
+```bash
+# suppose the $PWD is aflgo main folder
+export AFLGO=$PWD
+cd example
+./libxml2_test.sh
+```
+The BBtargets.txt will be generated.
