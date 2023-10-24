@@ -8,21 +8,21 @@ when we compiling it, where an indirect call refers to a function pointer or a v
 being used to call function. The following code shows the core idea of Part1.
 
 ```c++
-    for (auto &F : M) {
-		for (auto &BB : F) {
-			for (auto &I : BB) {				
-				if (CallInst *CI = dyn_cast<CallInst>(&I)) {
-					Function *calledFunction = CI->getCalledFunction();
-						if (!calledFunction) {
-							DebugLoc Loc = CI->getDebugLoc();
-							unsigned line = Loc->getLine();
-							StringRef file = Loc->getFilename();
-							bbtargets << file.substr(file.find_last_of("/\\") + 1).str() << ":" << line << "\n";
-						}
-				}				
-			}
-		}
+for (auto &F : M) {
+    for (auto &BB : F) {
+        for (auto &I : BB) {				
+            if (CallInst *CI = dyn_cast<CallInst>(&I)) {
+                Function *calledFunction = CI->getCalledFunction();
+                    if (!calledFunction) {
+                        DebugLoc Loc = CI->getDebugLoc();
+                        unsigned line = Loc->getLine();
+                        StringRef file = Loc->getFilename();
+                        bbtargets << file.substr(file.find_last_of("/\\") + 1).str() << ":" << line << "\n";
+                    }
+            }				
+        }
     }
+}
 ```
 
 We iterate over all the instructions in the module. We use `CallInst *CI = dyn_cast<CallInst>(&I)` 
@@ -33,10 +33,12 @@ we record its information in a file. Those records will be targets being fed to 
 
 ## Integrated into AFLGO
 
-### What files in aflgo/instrument do?
+### aflgo/instrument
 
-### What we have modified in aflgo/instrument?
 
-### What we have modified in aflgo/examples?
+
+### Modification in aflgo/instrument
+
+### Modification in aflgo/examples
 
 ## Test llvm-itargets-pass
