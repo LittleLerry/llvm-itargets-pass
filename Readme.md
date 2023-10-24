@@ -1,5 +1,9 @@
 # Part1 Indirect Call Detection
 
+## Indirect Call and CFG
+
+TBW
+
 ## LLVM Pass
 LLVM passes are compiler optimizations which operate on LLVM's intermediate representation (IR). 
 Each pass takes an LLVM module as input, applies a transformation to it, and returns a 
@@ -32,11 +36,6 @@ indirect calls, we cannot obtain them until the runtime. Once we detect an indir
 we record its information in a file. Those records will be targets being fed to AFLGO.
 
 ## Integrated into AFLGO
-
-### Modification in aflgo/instrument
-
-
-### Modification in aflgo/example
 
 ## Build and Test llvm-itargets-pass
 
