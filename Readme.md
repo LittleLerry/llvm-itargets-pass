@@ -1,5 +1,6 @@
 # Part1: Indirect Call Detection
 [Part1: Indirect Call Detection](https://github.com/LittleLerry/llvm-pass-itargets/)
+
 [PART2: Runtime Indirect Call Detection](https://github.com/LittleLerry/llvm-pass-icg/)
 
 ## What's the final goal?
@@ -15,7 +16,7 @@ we obtain from LLVM. The algorithm we will use consists of the following steps:
 
 The loop should be terminated at an appropriate time.
 
-## What's this part do?
+## What does this part do?
 
 Generate the target file.
 
