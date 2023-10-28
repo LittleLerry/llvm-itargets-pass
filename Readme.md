@@ -1,10 +1,36 @@
-# Part1 Indirect Call Detection
+# Part1: Indirect Call Detection
+[Part1: Indirect Call Detection](https://github.com/LittleLerry/llvm-pass-itargets/)
+[PART2: Runtime Indirect Call Detection](https://github.com/LittleLerry/llvm-pass-icg/)
 
-## Indirect Call and CFG
+## What's the final goal?
 
-TBW
+Basically, we want to modify AFLGO to construct a more complete Control Flow Graph (CFG) than what 
+we obtain from LLVM. The algorithm we will use consists of the following steps:
 
-## LLVM Pass
+(1) Generate the target file using `llvm-pass-itargets` and run AFLGO;
+(2) During runtime, detect extra indirect calls and obtain proper output with the given inputs;
+(3) Combine the output in step 2 with the current CFG/CG to construct a new CFG/CG;
+(4) If necessary, stop AFLGO to recalculate distances;
+(5) Go back to step (1) and repeat the process;
+
+The loop should be terminated at an appropriate time.
+
+## What's this part do?
+
+Generate the target file.
+
+## Function call types, CFG and CG
+
+In programming languages, direct calls are the typical form of function calls, where the 
+target function is known at compile-time. However, in certain cases, the target function may be 
+determined dynamically based on runtime conditions or computed values. An indirect call refers 
+to a type of function call where the target function is determined dynamically at runtime.
+
+A Control Flow Graph (CFG) is a graphical representation of the control flow or flow of 
+execution within a program. And a Call Graph (CG) is a representation of the calling relationships 
+between functions in a program.
+
+## Methodology
 LLVM passes are compiler optimizations which operate on LLVM's intermediate representation (IR). 
 Each pass takes an LLVM module as input, applies a transformation to it, and returns a 
 new module. Basically, we will use a LLVM Pass to detect all indirect calls in the program 
@@ -37,7 +63,10 @@ we record its information in a file. Those records will be targets being fed to 
 
 ## Integrated into AFLGO
 
-## Build and Test llvm-itargets-pass
+Please note that this part has been intergrated into AFLGO, which means that some depricated methods 
+may be invoked.
+
+## Build and test llvm-pass-itargets
 
 First you need to properly install the original version of aflgo. Then, replace the whole `/instrument` 
 and `/example` with the two directories in this project. Then you want to recomplie the `aflgo-clang`, 
